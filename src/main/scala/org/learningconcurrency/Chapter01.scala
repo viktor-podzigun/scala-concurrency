@@ -59,4 +59,11 @@ object Chapter01 {
 
     true
   }
+
+  /**
+   * Task 4:
+   *
+   * Modify the `Pair` class from this chapter so that it can be used in a pattern match.
+   */
+  case class Pair[P, Q](first: P, second: Q)
 }

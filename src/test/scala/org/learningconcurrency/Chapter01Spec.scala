@@ -35,4 +35,17 @@ class Chapter01Spec extends FlatSpec with Matchers {
     // empty collection
     check(List[Int]())(40 / _ > 5) shouldBe true
   }
+
+  "Pair" should "be used in pattern match" in {
+    //given
+    val pair = Pair(123, "abc")
+
+    //when
+    val result = pair match {
+      case Pair(first, second) => (first, second)
+    }
+
+    //then
+    result shouldBe (123, "abc")
+  }
 }
