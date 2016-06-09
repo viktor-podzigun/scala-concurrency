@@ -18,4 +18,12 @@ class Chapter01Spec extends FlatSpec with Matchers {
     h("1") shouldBe 1.0
     h("2") shouldBe 2.0
   }
+
+  "fuse" should "return composed Option object from two Option objects" in {
+    //when & then
+    fuse(None, None) shouldBe None
+    fuse(Some("a"), None) shouldBe None
+    fuse(None, Some("b")) shouldBe None
+    fuse(Some("a"), Some(1)) shouldBe Some(("a", 1))
+  }
 }
