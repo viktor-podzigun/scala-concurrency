@@ -1,21 +1,33 @@
 
-name := "concurrency-examples"
+name := "scala-concurrency"
 
-version := "1.0"
+organization := "com.github.viktor-podzigun"
 
-scalaVersion := "2.11.1"
+version := "1.0-SNAPSHOT"
+
+scalaVersion := "2.11.7"
 
 fork := false
 
-libraryDependencies += "commons-io" % "commons-io" % "2.4"
+// to run coverage tests use:
+//
+// activator clean coverage test coverageReport
+//
+//
+//coverageEnabled := true
+
+coverageMinimum := 80
+
+coverageFailOnMinimum := true
+
+scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
+
+libraryDependencies ++= Seq(
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test"
+)
 
 resolvers ++= Seq(
-  "Sonatype OSS Snapshots" at
-    "https://oss.sonatype.org/content/repositories/snapshots",
-
-  "Sonatype OSS Releases" at
-    "https://oss.sonatype.org/content/repositories/releases",
-
-  "Typesafe Repository" at
-    "http://repo.typesafe.com/typesafe/releases/"
+  //  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
+  //  "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases",
+  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 )
