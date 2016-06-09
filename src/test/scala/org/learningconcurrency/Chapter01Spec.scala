@@ -7,8 +7,8 @@ class Chapter01Spec extends FlatSpec with Matchers {
 
   "compose" should "return a function, which is the composition of functions f and g" in {
     //given
-    val f: String => Int = (a: String) => a.toInt
-    val g: Int => Double = (b: Int) => b.toDouble
+    val f: String => Int = a => a.toInt
+    val g: Int => Double = b => b.toDouble
 
     //when
     val h: String => Double = compose(g, f)
@@ -25,5 +25,14 @@ class Chapter01Spec extends FlatSpec with Matchers {
     fuse(Some("a"), None) shouldBe None
     fuse(None, Some("b")) shouldBe None
     fuse(Some("a"), Some(1)) shouldBe Some(("a", 1))
+  }
+
+  "check" should "return true if predicate function returns true for all the values" in {
+    //when & then
+    check(0 until 10)(40 / _ > 0) shouldBe false
+    check(1 until 10)(40 / _ > 0) shouldBe true
+    check(1 until 10)(40 / _ > 5) shouldBe false
+    // empty collection
+    check(List[Int]())(40 / _ > 5) shouldBe true
   }
 }
