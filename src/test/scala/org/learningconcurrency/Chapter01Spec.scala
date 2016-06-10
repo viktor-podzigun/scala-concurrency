@@ -48,4 +48,15 @@ class Chapter01Spec extends FlatSpec with Matchers {
     //then
     result shouldBe (123, "abc")
   }
+
+  "permutations" should "return lexicographic permutations of the given string" in {
+    //given
+    val s = "BAC"
+
+    //when
+    val result: Seq[String] = permutations(s)
+
+    //then
+    result shouldBe List("ABC", "ACB", "BAC", "BCA", "CAB", "CBA")
+  }
 }

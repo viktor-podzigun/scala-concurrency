@@ -66,4 +66,27 @@ object Chapter01 {
    * Modify the `Pair` class from this chapter so that it can be used in a pattern match.
    */
   case class Pair[P, Q](first: P, second: Q)
+
+  /**
+   * Task 5:
+   *
+   * Implement a permutations function, which, given a string, returns a sequence of strings
+   * that are lexicographic permutations of the input string:
+   * {{{
+   * def permutations(x: String): Seq[String]
+   * }}}
+   */
+  def permutations(x: String): Seq[String] = {
+    def permute(s: String): Seq[String] = {
+      if (s.length < 2) Seq(s)
+      else {
+        for (i <- s.indices) yield {
+          val first = s(i)
+          for (rest <- permute(s.take(i) + s.drop(i + 1))) yield first + rest
+        }
+      }.flatten
+    }
+
+    permute(x).toSet.toIndexedSeq.sorted
+  }
 }
