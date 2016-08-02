@@ -7,20 +7,23 @@ version := "1.0-SNAPSHOT"
 
 scalaVersion := "2.11.7"
 
-fork := false
-
 // to run coverage tests use:
 //
 // activator clean coverage test coverageReport
-//
-//
-//coverageEnabled := true
 
 coverageMinimum := 80
 
 coverageFailOnMinimum := true
 
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
+scalacOptions ++= Seq(
+  //"-Xcheckinit",
+  "-Xfatal-warnings",
+  "-Xlint:_",
+  "-explaintypes",
+  "-unchecked",
+  "-deprecation",
+  "-feature"
+)
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "2.2.4" % "test"

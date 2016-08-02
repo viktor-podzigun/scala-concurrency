@@ -41,12 +41,12 @@ class Chapter01Spec extends FlatSpec with Matchers {
     val pair = Pair(123, "abc")
 
     //when
-    val result = pair match {
+    val result: (Int, String) = pair match {
       case Pair(first, second) => (first, second)
     }
 
     //then
-    result shouldBe (123, "abc")
+    result shouldBe Tuple2(123, "abc")
   }
 
   "permutations" should "return lexicographic permutations of the given string" in {
