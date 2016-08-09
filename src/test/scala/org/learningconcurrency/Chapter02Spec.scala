@@ -17,4 +17,18 @@ class Chapter02Spec extends FlatSpec with Matchers {
     result._1 shouldBe 4
     result._2 shouldBe "22"
   }
+
+  "periodically" should "execute computation block `b` every `duration` milliseconds" in {
+    //given
+    @volatile var count = 0
+
+    //when
+    periodically(100) {
+      count += 1
+    }
+
+    //then
+    Thread.sleep(250)
+    count shouldBe 2
+  }
 }

@@ -28,4 +28,27 @@ object Chapter02 {
 
     (resultA.get, resultB.get)
   }
+
+  /**
+   * Task 2:
+   *
+   * Implement a `periodically` method, which takes a time interval `duration`
+   * specified in milliseconds, and a computation block `b`. The method starts a thread that
+   * executes the computation block `b` every `duration` milliseconds.
+   * It should have the following signature:
+   * {{{
+   * def periodically(duration: Long)(b: =>Unit): Unit
+   * }}}
+   */
+  def periodically(duration: Long)(b: => Unit): Unit = {
+    thread {
+      while (true) {
+        synchronized {
+          wait(duration)
+        }
+
+        b
+      }
+    }
+  }
 }
