@@ -51,4 +51,45 @@ object Chapter02 {
       }
     }
   }
+
+  /**
+   * Task 3:
+   *
+   * Implement a `SyncVar` class with the following interface:
+   * {{{
+   * class SyncVar[T] {
+   *   def get(): T = ???
+   *   def put(x: T): Unit = ???
+   * }
+   * }}}
+   * A `SyncVar` object is used to exchange values between two or more threads.
+   * When created, the `SyncVar` object is empty:
+   *   * Calling `get` throws an exception
+   *   * Calling `put` adds a value to the `SyncVar` object
+   * After a value is added to a `SyncVar` object, we can say that it is non-empty:
+   *   * Calling `get` returns the current value, and changes the state to empty
+   *   * Calling `put` throws an exception
+   */
+  class SyncVar[T] {
+
+    private var data: Option[T] = None
+
+    def get(): T = synchronized {
+      if (data.isEmpty) {
+        throw new IllegalStateException("SyncVar is empty")
+      }
+
+      val value = data.get
+      data = None
+      value
+    }
+
+    def put(x: T): Unit = synchronized {
+      if (data.nonEmpty) {
+        throw new IllegalStateException("SyncVar is non-empty")
+      }
+      
+      data = Some(x)
+    }
+  }
 }

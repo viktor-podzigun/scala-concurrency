@@ -31,4 +31,24 @@ class Chapter02Spec extends FlatSpec with Matchers {
     Thread.sleep(250)
     count shouldBe 2
   }
+
+  "SyncVar" should "throw exceptions when get and empty, and when put and non-empty" in {
+    //given
+    val syncVar = new SyncVar[Int]
+
+    //when & then
+    an [IllegalStateException] should be thrownBy {
+      syncVar.get()
+    }
+
+    syncVar.put(1)
+    an [IllegalStateException] should be thrownBy {
+      syncVar.put(2)
+    }
+
+    syncVar.get() shouldBe 1
+    an [IllegalStateException] should be thrownBy {
+      syncVar.get()
+    }
+  }
 }
